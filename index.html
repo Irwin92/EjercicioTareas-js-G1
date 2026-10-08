@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi agenda de Tareas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenedor">
+            <p class="etiqueta">IF0009 - JavaScript</p>
+            <h1>Mi Agenda Académica</h1>
+            <p>Organiza tus actividades y visualiza tu progreso.</p>
+        </div>
+    </header>
+    <main class="contenedor panel">
+        <section aria-labelledby="nuevo titulo">
+            <h2 id="nuevo-titulo">Nueva Tarea</h2>
+            <form id="formulario" novalidate>
+                <label for="titulo">Descripcion de la tarea</label>
+                <div class="fila-formulario">
+                    <input type="text" name="titulo" id="titulo" maxlength="80"
+                    placeholder="Ej: Entregar práctica de Django">
+                    <button type="submit">Agregar Tarea</button>
+                </div>
+                <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+        <section aria-labelledby="lista-titulo">
+            <div class="cabecera-lista">
+                <h2 id="lista-titulo">Mis Tareas</h2>
+                <p id="contador" aria-live="polite">0 pendientes de 0</p>
+            </div>
+            <div class="filtros" role="group" aria-label="Filtrar Tareas">
+                <button type="button" data-filtro="todas" class="activo" aria-pressed="true">Todas</button>
+                <button type="button" data-filtro="pendientes"  aria-pressed="false">Pendientes</button>
+                <button type="button" data-filtro="completadas"  aria-pressed="false">Completadas</button>
+            </div>
+            <ul id="lista" class="lista"></ul>
+            <p id="vacio" class="vacio">Todavia no hya tareas en esta vista</p>
+        </section>
+    </main>
+    <footer class="contenedor pie">Proyecto práctico. HTML5 + CSS3 + JavaAcript</footer>
+    <script src="app.js" ></script>
+</body>
+</html>
