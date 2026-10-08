@@ -150,9 +150,72 @@ function renderizar() {
     vacio.hidden = visibles.length > 0;
 }//Fin funcion renderizar
 //--------------------------------------------------------------------------------------------------
+/**
+ * Se filtran Tareas
+ */
+filtros.addEventListener("click", (evento) => {
+    const boton =
+        evento.target.closest("button[data-filtro]");
+    if(!boton){
+        return;
+    }
+
+    //Guardar el filtro elegido
+    filtroActual = boton.dataset.filtro;
+
+    //Obtener todos los botones de filtro
+    const botonesFiltro = filtros.querySelectorAll("button");
+
+    //Marcar visualmente solo el filtro activo
+    for (const opcion of botonesFiltro){
+        const activo = opcion === boton;
+        opcion.classList.toggle(
+            "activo",
+            activo
+        );
+        opcion.setAttribute(
+            "aria-pressed",
+            String(activo)
+        );
+    }
+    renderizar();
+});
+//--------------------------------------------------------------------------------------------------
+/**
+ * Funcion para completar,reabrir o eliminar
+ * Se utiliza delegacion de eventos
+ * un solo listener controla los botones de todas las tareas
+ */
+lista.addEventListener("click", (evento)=>{
+    //Busca el botón presionado
+    const boton = evento.target.closest("button[data-accion]");
+
+    if(!boton)
+    {
+        return;
+    }
+    //dataset.id llega como texto; lo convertimos a numero
+    const id = Number(boton.dataset.id);
+
+    //findIndex() busca la posicion de la tarea en el arreglo
+    const indice = tareas.findIndex(
+        (tarea)=> tarea.id ===id
+    );
 
 
+    //Completar o reabrir
+    if(boton.dataset.accion === "alternar"){
+        tareas[indice].completada = !tareas[indice].completada;
+    }
+    //Eliminar
+    else if(boton.dataset.accion === "eliminar"){
+        tareas.splice(indice,1);
+    }
+    renderizar();
+});
 
+
+//--------------------------------------------------------------------------------------------------
 
 renderizar();
 
